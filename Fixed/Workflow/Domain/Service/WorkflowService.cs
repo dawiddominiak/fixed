@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fixed.Domain.Entity
+namespace Fixed.Workflow.Domain.Service
 {
-    class Workday
+    public class WorkflowService
     {
     }
 }

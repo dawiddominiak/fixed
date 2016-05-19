@@ -18,7 +18,7 @@ namespace Fixed.Workflow
         {
             var container = new WindsorContainer();
             container.Register(Castle.MicroKernel.Registration.Component.For<WorkdayController>());
-            container.Register(Castle.MicroKernel.Registration.Component.For<WorkflowService>());
+            container.Register(Castle.MicroKernel.Registration.Component.For<WorkdayService>());
             container.Register(Component.For<WorkdayRepository>());
 
             return container;

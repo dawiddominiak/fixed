@@ -72,7 +72,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\Entity\IRepository.cs" />
+    <Compile Include="Common\Repository\Repository.cs" />
+    <Compile Include="Common\Service\IRepositoryService.cs" />
+    <Compile Include="Common\Service\RepositoryService.cs" />
     <Compile Include="Workflow\Controller\WorkdayController.cs" />
+    <Compile Include="Workflow\Domain\Entity\IWorkdayRepository.cs" />
     <Compile Include="Workflow\Domain\Entity\Product.cs" />
     <Compile Include="Workflow\Domain\Entity\Route.cs" />
     <Compile Include="Workflow\Domain\Entity\Shop.cs" />
@@ -80,7 +85,8 @@
     <Compile Include="Workflow\Domain\Entity\ShopRouteProductListPosition.cs" />
     <Compile Include="Workflow\Domain\Entity\Workday.cs" />
     <Compile Include="Workflow\Domain\Repository\WorkdayRepository.cs" />
-    <Compile Include="Workflow\Domain\Service\WorkflowService.cs" />
+    <Compile Include="Workflow\Domain\Service\IWorkdayService.cs" />
+    <Compile Include="Workflow\Domain\Service\WorkdayService.cs" />
     <Compile Include="Workflow\Domain\WorkflowContext.cs" />
     <Compile Include="Workflow\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

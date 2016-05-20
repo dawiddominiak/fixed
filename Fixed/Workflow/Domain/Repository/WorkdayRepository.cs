@@ -3,6 +3,7 @@ using System.Linq;
 using Fixed.Workflow.Domain.Entity;
 using Fixed.Common.Repository;
 using System.Data.Entity;
+using Fixed.Workflow.Domain.Entity.Workday;
 
 namespace Fixed.Workflow.Domain.Repository
 {

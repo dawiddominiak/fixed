@@ -1,5 +1,11 @@
-﻿using System.Data.Entity;
-using Fixed.Workflow.Domain.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
+using Fixed.Workflow.Domain.Entity.Order;
+using Fixed.Workflow.Domain.Entity.Product;
+using Fixed.Workflow.Domain.Entity.Route;
+using Fixed.Workflow.Domain.Entity.Shop;
+using Fixed.Workflow.Domain.Entity.Workday;
 
 namespace Fixed.Workflow.Domain
 {
@@ -8,31 +14,87 @@ namespace Fixed.Workflow.Domain
         public DbSet<Workday> Workdays { get; set; }
         public DbSet<Product> Products { get; set; } 
         public DbSet<Route> Routes { get; set; }
+        public DbSet<RouteVariant> RouteVariants { get; set; } 
         public DbSet<Shop> Shops { get; set; }
-        public DbSet<ShopRouteProductList> ShopRouteProductLists { get; set; }
-        public DbSet<ShopRouteProductListPosition> ShopRouteProductListPositions { get; set; } 
+        public DbSet<Order> Orders { get; set; } 
+        public DbSet<OrderPosition> OrderPositions { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Workday>()
-                .HasRequired(t => t.ShopRouteProductList)
-                .WithRequiredPrincipal(t => t.Workday)
+                .HasMany(w => w.RouteVariants)
+                .WithMany(v => v.Workdays)
+                .Map(
+                    wv =>
+                    {
+                        wv.MapLeftKey("WorkdayReferenceId");
+                        wv.MapRightKey("RouteVariantReferenceId");
+                        wv.ToTable("WorkdayRouteVariant");
+                    }
+                )
             ;
 
-            modelBuilder.Entity<ShopRouteProductList>()
-                .HasMany(t => t.ShopProductListPositions)
+            modelBuilder.Entity<Workday>()
+                .HasMany(w => w.Orders)
+                .WithRequired(o => o.Workday)
+                .HasForeignKey(o => o.WorkdayId)
             ;
 
-            modelBuilder.Entity<ShopRouteProductListPosition>()
-                .HasRequired(t => t.Product)
+            modelBuilder.Entity<Route>()
+                .HasMany(r => r.Variants)
+                .WithRequired(v => v.Route)
             ;
 
-            modelBuilder.Entity<ShopRouteProductListPosition>()
-                .HasRequired(t => t.Route)
+            modelBuilder.Entity<RouteVariant>()
+                .HasMany(v => v.Shops)
+                .WithMany()
+                .Map(
+                    vs =>
+                    {
+                        vs.MapLeftKey("RouteVariantReferenceId");
+                        vs.MapRightKey("ShopReferenceId");
+                        vs.ToTable("RouteVariantsShops");
+                    }
+                )
             ;
 
-            modelBuilder.Entity<ShopRouteProductListPosition>()
-                .HasRequired(t => t.Shop)
+            modelBuilder.Entity<Shop>()
+                .HasMany(s => s.Orders)
+                .WithRequired(o => o.Shop)
+                .HasForeignKey(o => o.ShopId)
+            ;
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.WorkdayId)
+                .IsRequired()
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IDX_WorkdayShop", 1) {IsUnique = true}
+                    )
+                )
+            ;
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.ShopId)
+                .IsRequired()
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(
+                        new IndexAttribute("IDX_WorkdayShop", 2) {IsUnique = true}
+                        )
+                )
+            ;
+
+            modelBuilder.Entity<Order>()
+                .HasMany(o => o.OrderPositions)
+                .WithRequired(op => op.Order)
+            ;
+
+            modelBuilder.Entity<OrderPosition>()
+                .HasRequired(op => op.Product)
+                .WithMany()
             ;
 
             base.OnModelCreating(modelBuilder);

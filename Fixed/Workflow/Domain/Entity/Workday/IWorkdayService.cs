@@ -1,8 +1,7 @@
 ﻿using System;
 using Fixed.Common.Service;
-using Fixed.Workflow.Domain.Entity;
 
-namespace Fixed.Workflow.Domain.Service
+namespace Fixed.Workflow.Domain.Entity.Workday
 {
     public interface IWorkdayService : IRepositoryService<Workday>
     {

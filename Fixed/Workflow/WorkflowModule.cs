@@ -15,6 +15,7 @@ namespace Fixed.Workflow
         {
             var container = new WindsorContainer();
             container.Register(Component.For<WorkdayController>());
+            container.Register(Component.For<SettlementController>());
             container.Register(Component.For<WorkflowContext>());
             container.Register(Component.For<IWorkdayRepository>().ImplementedBy<WorkdayRepository>());
             container.Register(Component.For<IWorkdayService>().ImplementedBy<WorkdayService>());

@@ -26,6 +26,7 @@ namespace Fixed.Workflow.View
             var container = module.Initialize();
             var workdayController = container.Resolve<WorkdayController>();
             WorkdayController = workdayController;
+            WorkdayController.MainWindow = this;
 
             var selectedDateTime = SelectOperationDateDatePicker.SelectedDate ?? new DateTime();
             WorkdayController.Manage(selectedDateTime);

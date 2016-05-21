@@ -5,6 +5,6 @@ namespace Fixed.Workflow.Domain.Entity.Workday
 {
     public interface IWorkdayService : IRepositoryService<Workday>
     {
-        Workday FindOneByDate(DateTime date);
+        Workday EnsureWorkday(DateTime date);
     }
 }

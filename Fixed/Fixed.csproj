@@ -76,6 +76,7 @@
     <Compile Include="Common\Repository\Repository.cs" />
     <Compile Include="Common\Service\IRepositoryService.cs" />
     <Compile Include="Common\Service\RepositoryService.cs" />
+    <Compile Include="Workflow\Controller\SettlementController.cs" />
     <Compile Include="Workflow\Controller\WorkdayController.cs" />
     <Compile Include="Workflow\Domain\Entity\Order\Order.cs" />
     <Compile Include="Workflow\Domain\Entity\Order\OrderPosition.cs" />
@@ -96,10 +97,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Workflow\View\Routes.xaml.cs">
+      <DependentUpon>Routes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Workflow\View\SettlementSpreadSheetWindow.xaml.cs">
+      <DependentUpon>SettlementSpreadSheetWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Workflow\WorkflowModule.cs" />
     <Page Include="Workflow\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Workflow\View\Routes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Workflow\View\SettlementSpreadSheetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

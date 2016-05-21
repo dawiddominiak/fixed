@@ -1,6 +1,5 @@
 ﻿using System;
 using Fixed.Common.Service;
-using Fixed.Workflow.Domain.Entity;
 using Fixed.Workflow.Domain.Entity.Workday;
 
 namespace Fixed.Workflow.Domain.Service
@@ -11,9 +10,20 @@ namespace Fixed.Workflow.Domain.Service
         {
         }
 
-        public Workday FindOneByDate(DateTime date)
+        public Workday EnsureWorkday(DateTime date)
         {
-            return Repository.FindOneByDate(date);
+            var workday = Repository.FindOneByDate(date);
+
+            if (workday == null)
+            {
+                workday = new Workday()
+                {
+                    Date = date
+                };
+                Repository.Insert(workday);
+            }
+
+            return workday;
         }
     }
 }

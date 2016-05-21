@@ -21,6 +21,8 @@ namespace Fixed.Workflow.Domain
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //TODO: remove on production
+            Database.SetInitializer<WorkflowContext>(new DropCreateDatabaseIfModelChanges<WorkflowContext>());
 
             modelBuilder.Entity<Workday>()
                 .HasMany(w => w.RouteVariants)

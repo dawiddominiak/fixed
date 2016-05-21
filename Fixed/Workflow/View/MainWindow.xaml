@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fixed"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Fixed" Height="350" Width="300">
     <Grid>
@@ -12,7 +13,7 @@
             <ColumnDefinition Width="142*"/>
         </Grid.ColumnDefinitions>
         <Label x:Name="SelectOperationDateLabel" Content="Select operation date" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <DatePicker x:Name="SelectOperationDateDatePicker" Margin="10,41,70.333,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <DatePicker x:Name="SelectOperationDateDatePicker" Margin="10,41,70.333,0" VerticalAlignment="Top" Grid.Column="1" SelectedDate="{x:Static sys:DateTime.Now}"/>
         <Button x:Name="ManageButton" Content="Manage" Margin="138,70,70.333,0" VerticalAlignment="Top" Grid.Column="1" Click="ManageButton_Click"/>
     </Grid>
 </Window>
